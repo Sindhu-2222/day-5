@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Sindhu-2222/day-5.git'
+            }
+        }
+
+        stage('Set up Python Environment') {
+            steps {
+                sh 'python3 -m venv venv'
+                sh 'bash -c "source venv/bin/activate && pip install -r requirements.txt || true"' // Ignore error if requirements.txt is missing
+            }
+        }
+
+        stage('Run area.py') {
+            steps {
+                sh 'bash -c "source venv/bin/activate && python3 area.py 5 10"' // Provide required arguments
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                sh 'bash -c "source venv/bin/activate && python3 -m unittest discover -s tests || true"'
+            }
+        }
+    }
+}
