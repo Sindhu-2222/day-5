@@ -1,10 +1,14 @@
-a = float(input('Enter first side: '))
-b = float(input('Enter second side: '))
-c = float(input('Enter third side: '))
+import sys
 
-# calculate the semi-perimeter
-s = (a + b + c) / 2
+# Check if the correct number of arguments is provided
+if len(sys.argv) != 3:
+    print("Usage: python3 area.py <side1> <side2>")
+    sys.exit(1)
 
-# calculate the area
-area = (s*(s-a)*(s-b)*(s-c)) ** 0.5
-print('The area of the triangle is %0.2f' %area)
+# Read sides from command-line arguments
+side1 = float(sys.argv[1])
+side2 = float(sys.argv[2])
+
+# Calculate area
+area = side1 * side2
+print(f"The area of the rectangle is: {area}")
