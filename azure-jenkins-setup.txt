@@ -1,0 +1,91 @@
+Setting Up Jenkins on Azure
+Documented Steps
+Prerequisites
+An Azure account with necessary permissions to create and manage Virtual Machines (VM).
+Basic knowledge of Azure, SSH, and Jenkins.
+Steps:
+1. Open the Azure Portal and Navigate to the Virtual Machines Section
+Open a web browser and go to the Azure Portal.
+Log in with your Azure credentials.
+In the Azure Portal, search for "Virtual Machines" in the search bar and select "Virtual Machines" from the search results.
+2. Create a New Ubuntu VM
+In the Virtual Machines section, click on the "+ Add" button to create a new VM.
+
+In the "Create a virtual machine" page, provide the following details:
+
+For Basics Tab:
+
+Subscription: Select your subscription.
+Resource group: Create a new resource group or select an existing one.
+Virtual machine name: Enter a name for your VM (e.g., Jenkins-VM).
+Region: Select a region close to your location or application.
+Image: Select "Ubuntu Server 20.04 LTS" (or the latest available version).
+Size: Select a VM size suitable for Jenkins. A basic recommendation is Standard_DS2_v2.
+3. Configure VM Size, Disk, and Network Settings
+For Disks Tab:
+
+OS disk type: Choose a suitable disk type (Standard SSD is a good balance).
+For Networking Tab:
+
+Virtual network: Create a new virtual network or select an existing one.
+Subnet: Use the default subnet or specify a custom one.
+Public IP: Enable the public IP address.
+NIC network security group: Select "Basic".
+Public inbound ports: Allow selected ports.
+Management Tab:
+
+Verify management settings (most defaults are fine).
+Review + create Tab:
+
+Review your settings and click the "Create" button.
+4. Allow Inbound Ports for SSH (Port 22) and HTTP (Port 8080)
+During the Networking tab configuration, ensure the following inbound port rules are set:
+SSH (port 22) from any IP address.
+Custom TCP rule for HTTP (port 8080) from any IP address.
+5. Connect to the VM via SSH
+Once the VM is deployed, navigate to the "Virtual Machines" section in the Azure Portal.
+Select your newly created VM.
+On the VM's overview page, note the public IP address.
+Use an SSH client to connect to your VM:
+Open your terminal or command prompt.
+Use the following command to connect to your VM, replacing <public-ip-address> with your VM's public IP address:
+sh
+Copy Code
+
+
+ssh your-username@<public-ip-address>
+6. Install Java and Jenkins
+Update the package list:
+
+Use the appropriate package manager commands to update the list of packages.
+Install Java:
+
+Use the package manager to install the latest version of OpenJDK (Jenkins typically requires Java).
+Add Jenkins repository and import GPG keys:
+
+Add the Jenkins repository.
+Import the GPG keys.
+Install Jenkins:
+
+Use the package manager to install Jenkins.
+7. Start Jenkins and Perform the Initial Setup
+Start the Jenkins service:
+
+Start the Jenkins service using system commands specific to your OS (typically systemctl).
+Enable Jenkins on startup:
+
+Ensure Jenkins starts automatically on boot.
+Open Jenkins in a Web Browser:
+
+Navigate to http://<public-ip-address>:8080 in your web browser.
+Initial Admin Password:
+
+Retrieve the initial admin password using the system commands and directory paths to the Jenkins secrets.
+Complete the Setup Wizard:
+
+Use the password to unlock Jenkins.
+Follow the setup wizard to install suggested plugins and create your admin user account.
+These documented steps provide a comprehensive guide to setting up Jenkins on an Azure VM, ensuring a smooth installation and initial configuration process. This optimized approach ensures that the setup can handle typical scenarios and requirements in competitive programming and real-world use cases.
+
+
+
